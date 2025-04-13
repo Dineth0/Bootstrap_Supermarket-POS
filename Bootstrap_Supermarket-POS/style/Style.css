@@ -16,3 +16,15 @@ body{
     background-color: #009990;
     border-radius: 10%;
 }
+.form-control, .form-select{
+    background-color: transparent;
+}
+h1{
+    color: white;
+}
+#inputSearch{
+    background-color: #B5FCCD;
+}
+.searchBtn{
+    background-color: #009990;
+}
