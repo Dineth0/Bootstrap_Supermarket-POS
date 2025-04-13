@@ -4,3 +4,15 @@
 .nav-link:hover{
     color: #5f0d72;
 }
+#dashboard{
+    background-color: rgba(260,260,260,0.2);
+    height: 100%;
+    width: 100%;
+}
+body{
+    background-color: #274751;
+}
+.card{
+    background-color: #009990;
+    border-radius: 10%;
+}
