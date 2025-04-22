@@ -31,3 +31,16 @@ h1{
 #itemSearch{
     background-color: #B5FCCD;
 }
+.btnpurches{
+    outline: 2px solid #E9F5BE;
+    border-radius: 3px;
+    background-color: transparent;
+    border: none;
+    margin: 5px;
+    padding: 5px;
+    color: #E9F5BE;
+}
+.btnpurches:hover{
+    background-color: #E9F5BE;
+    color: black;
+}
