@@ -44,3 +44,6 @@ h1{
     background-color: #E9F5BE;
     color: black;
 }
+.DashCard{
+    box-shadow: #292828 10px 10px 2px;
+}
