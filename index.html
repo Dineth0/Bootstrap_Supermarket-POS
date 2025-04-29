@@ -179,30 +179,30 @@
                         <br>
                         <form>
                             <div class="mb-3">
-                                <label for="id" class="form-label">Item ID</label>
-                                <input type="text" class="form-control" id="itemid" placeholder="C000">
+                                <label for="itemCode" class="form-label">Item ID</label>
+                                <input type="text" class="form-control" id="itemCode" placeholder="C000">
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Item Name</label>
-                                <input type="text" class="form-control" id="itemname" placeholder="">
+                                <label for="itemName" class="form-label">Item Name</label>
+                                <input type="text" class="form-control" id="itemName" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label for="address" class="form-label">Descriptio</label>
+                                <label for="description" class="form-label">Description</label>
                                 <input type="text" class="form-control" id="description" placeholder="">
                             </div>
                             <div class="mb-3">
                                 <label for="price" class="form-label">Price</label>
-                                <input type="email" class="form-control" id="price" placeholder="">
+                                <input type="text" class="form-control" id="price" placeholder="">
                             </div>
                             <div class="mb-3">
                                 <label for="qty" class="form-label">QTY</label>
-                                <input type="email" class="form-control" id="qty" placeholder="">
+                                <input type="number" class="form-control" id="qty" placeholder="">
                             </div>
 
                             <div class="row d-flex justify-content-center">
 
                                 <div class="col-6 col-sm-3 mb-2">
-                                    <button type="button" class="btn btn-outline-primary">Save</button>
+                                    <button type="button" class="btn btn-outline-primary" id="item-save">Save</button>
                                 </div>
 
                                 <div class="col-6 col-sm-3 mb-2">
@@ -241,7 +241,7 @@
                                 <th scope="col">Qty</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="item-tbody">
 
                             </tbody>
                         </table>
@@ -442,6 +442,8 @@
                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="module" src="Bootstrap_Supermarket-POS/controller/CustomerController.js"></script>
 <script type="module" src="Bootstrap_Supermarket-POS/model/CustomerModel.js"></script>
+<script type="module" src="Bootstrap_Supermarket-POS/controller/ItemController.js"></script>
+<script type="module" src="Bootstrap_Supermarket-POS/model/ItemModel.js"></script>
 
 <script>
     $("#Dashboard-content").css("display", "block");
