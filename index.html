@@ -111,14 +111,14 @@
                                 <input type="text" class="form-control" id="address" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Customer Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="">
+                                <label for="number" class="form-label">Customer Email</label>
+                                <input type="number" class="form-control" id="number" placeholder="">
                             </div>
 
                             <div class="row d-flex justify-content-center">
 
                                 <div class="col-6 col-sm-3 mb-2">
-                                    <button type="button" class="btn btn-outline-primary">Save</button>
+                                    <button type="button" class="btn btn-outline-primary" id="customer-save">Save</button>
                                 </div>
 
                                 <div class="col-6 col-sm-3 mb-2">
@@ -191,11 +191,11 @@
                                 <input type="text" class="form-control" id="description" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Price</label>
+                                <label for="price" class="form-label">Price</label>
                                 <input type="email" class="form-control" id="price" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">QTY</label>
+                                <label for="qty" class="form-label">QTY</label>
                                 <input type="email" class="form-control" id="qty" placeholder="">
                             </div>
 
@@ -439,6 +439,8 @@
 
 <script src="Bootstrap_Supermarket-POS/lib/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module" src="Bootstrap_Supermarket-POS/controller/CustomerController.js"></script>
 
 <script>
     $("#Dashboard-content").css("display", "block");
