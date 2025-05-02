@@ -20,6 +20,7 @@ $('#customer-save').on("click", function () {
     }else {
         let customer_data = new CustomerModel(customerId, customerName, address, number);
         customer_db.push(customer_data);
+        clearForm();
         console.log(customer_db);
         loadCustomerTableData();
         Swal.fire({
@@ -52,7 +53,7 @@ function loadCustomerTableData(){
              });
 }
 
-$('#customer-tbody').on('click', 'tr', function () {
+$('.cus-body').on('click', 'tr', function () {
     let id = $(this).index();
     let obj = customer_db[id];
 
@@ -66,4 +67,11 @@ $('#customer-tbody').on('click', 'tr', function () {
     $('#address').val(address);
     $('#number').val(phoneNumber);
 })
+
+const clearForm = () =>{
+    $(`#id,#name,#address,#number`).val("");
+}
+$('#customer-clear').on('click', function () {
+    clearForm();
+});
 
