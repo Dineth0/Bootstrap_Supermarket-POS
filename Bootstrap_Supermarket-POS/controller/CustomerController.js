@@ -22,7 +22,9 @@ $('#customer-save').on("click", function () {
         customer_db.push(customer_data);
         clearForm();
         console.log(customer_db);
+        loadCustomerDropdown();
         loadCustomerTableData();
+        $('#selectCustomerId').append($('<option>').text(customerId));
         Swal.fire({
             title: "Added Successfully!",
             icon: "success",
@@ -31,6 +33,18 @@ $('#customer-save').on("click", function () {
         })
     }
 });
+function loadCustomerDropdown() {
+    $('#selectCustomerId').empty();
+    $('#selectCustomerId').append(`<option>Select Customer ID</option>`);
+    customer_db.forEach(customer => {
+        $('#selectCustomerId').append(
+            $('<option>', {
+                value: customer.customerId,
+            })
+        );
+    });
+}
+
 
 
 

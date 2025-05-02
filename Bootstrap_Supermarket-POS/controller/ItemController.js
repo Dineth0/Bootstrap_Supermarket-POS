@@ -1,4 +1,4 @@
-import  {item_db} from "../db/db.js";
+import {customer_db, item_db} from "../db/db.js";
 import ItemModel from "../model/ItemModel.js";
 
 $('#item-save').on('click', function(){
@@ -20,6 +20,7 @@ $('#item-save').on('click', function(){
         item_db.push(item_data);
         clearForm();
         console.log(item_db);
+        loadItemDropdown();
         loadItemTableData();
         Swal.fire({
             title: "Added Successfully!",
@@ -28,6 +29,19 @@ $('#item-save').on('click', function(){
         });
     }
 });
+
+function loadItemDropdown() {
+    $('#selectItemCode').empty();
+    $('#selectItemCode').append(`<option>Select Item ID</option>`);
+    item_db.forEach(item => {
+        $('#selectItemCode').append(
+            $('<option>', {
+                value: item.itemCode,
+                text: item.itemCode
+            })
+        );
+    });
+}
 
 function loadItemTableData(){
     $('#item-tbody').empty();

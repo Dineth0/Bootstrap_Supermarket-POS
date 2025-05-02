@@ -265,8 +265,8 @@
                         <br>
                         <form>
                             <div class="mb-3">
-                                <label for="orderid" class="form-label">Order ID</label>
-                                <input type="text" class="form-control" id="orderid" placeholder="C000">
+                                <label for="orderId" class="form-label">Order ID</label>
+                                <input type="text" class="form-control" id="orderId" placeholder="C000">
                             </div>
                             <div class="mb-3">
                                 <label for="date" class="form-label">Date</label>
@@ -277,16 +277,16 @@
                                 <select id="selectCustomerId" class="form-select"></select>
                             </div>
                             <div class="mb-3">
-                                <label for="cname" class="form-label">Customer Name</label>
-                                <input type="text" class="form-control" id="cname" placeholder="">
+                                <label for="cusName" class="form-label">Customer Name</label>
+                                <input type="text" class="form-control" id="cusName" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label for="add" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="add" placeholder="">
+                                <label for="cusAddress" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="cusAddress" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label for="mail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="mail" placeholder="">
+                                <label for="cusNumber" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="cusNumber" placeholder="">
                             </div>
 
 
@@ -300,28 +300,28 @@
                     <br>
                     <form>
                         <div class="mb-3">
-                            <label for="OItemid" class="form-label">Item Id</label>
-                            <select id="OItemid" class="form-select"></select>
+                            <label for="selectItemCode" class="form-label">Item Id</label>
+                            <select id="selectItemCode" class="form-select"></select>
                         </div>
                         <div class="mb-3">
-                            <label for="Oitemname" class="form-label">Item Name</label>
-                            <input type="text" class="form-control" id="Oitemname" placeholder="">
+                            <label for="OrItemName" class="form-label">Item Name</label>
+                            <input type="text" class="form-control" id="OrItemName" placeholder="">
                         </div>
                         <div class="mb-3">
-                            <label for="Oprice" class="form-label">price</label>
-                            <input type="text" class="form-control" id="Oprice" placeholder="">
+                            <label for="OrPrice" class="form-label">price</label>
+                            <input type="text" class="form-control" id="OrPrice" placeholder="">
                         </div>
                         <div class="mb-3">
-                            <label for="IQTY" class="form-label">QTY</label>
-                            <input type="text" class="form-control" id="IQTY" placeholder="">
+                            <label for="ItemQty" class="form-label">QTY</label>
+                            <input type="text" class="form-control" id="ItemQty" placeholder="">
                         </div>
                         <div class="mb-3">
-                            <label for="OQTY" class="form-label">Order QTY</label>
-                            <input type="text" class="form-control" id="OQTY" placeholder="">
+                            <label for="OrQty" class="form-label">Order QTY</label>
+                            <input type="text" class="form-control" id="OrQty" placeholder="">
                         </div>
                     </form>
-                            <button type="button" class="btn btn-outline-warning">Add Cart</button>
-                            <button type="button" class="btn btn-outline-danger">Remove</button>
+                            <button type="button" class="btn btn-outline-warning" id="card">Add Cart</button>
+                            <button type="button" class="btn btn-outline-danger" id="remove">Remove</button>
                 </div>
             </div>
 
@@ -444,6 +444,8 @@
 <script type="module" src="Bootstrap_Supermarket-POS/model/CustomerModel.js"></script>
 <script type="module" src="Bootstrap_Supermarket-POS/controller/ItemController.js"></script>
 <script type="module" src="Bootstrap_Supermarket-POS/model/ItemModel.js"></script>
+                       <script type="module" src="Bootstrap_Supermarket-POS/controller/OrdersController.js"></script>
+                       <script type="module" src="Bootstrap_Supermarket-POS/model/OrdersModel.js"></script>
 
 <script>
     $("#Dashboard-content").css("display", "block");
