@@ -18,6 +18,7 @@ $('#item-save').on('click', function(){
     }else {
         let item_data = new ItemModel(itemCode, itemName, description, price, qty);
         item_db.push(item_data);
+        clearForm();
         console.log(item_db);
         loadItemTableData();
         Swal.fire({
@@ -49,3 +50,28 @@ function loadItemTableData(){
     });
 
 }
+
+$('.it-body').on('click', 'tr', function () {
+    let id = $(this).index();
+    let obj = item_db[id];
+
+    let itemCode = obj.itemCode;
+    let itemName = obj.itemName;
+    let description = obj.description;
+    let price = obj.price;
+    let qty = obj.qty;
+
+    $('#itemCode').val(itemCode);
+    $('#itemName').val(itemName);
+    $('#description').val(description);
+    $('#price').val(price);
+    $('#qty').val(qty);
+});
+
+const clearForm = () =>{
+    $(`#itemCode,#itemName,#description,#price,#qty`).val("");
+}
+
+$('#item-clear').on('click', function(){
+    clearForm();
+});
