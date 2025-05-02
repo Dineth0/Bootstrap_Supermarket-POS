@@ -34,12 +34,67 @@ $('#card').on('click', function () {
     let date = $('#date').val();
     let customerId = $('#selectCustomerId').val();
     let customerName = $('#cusName').val();
-    let orderId = $('#orderId').val();
-    let orderId = $('#orderId').val();
-    let orderId = $('#orderId').val();
-    let orderId = $('#orderId').val();
-    let orderId = $('#orderId').val();
-    let orderId = $('#orderId').val();
+    let itemCode = $('#selectItemCode').val();
+    let itemName = $('#OrItemName').val();
+    let price = parseFloat($('#OrPrice').val());
+    let itemQty = parseInt($('#ItemQty').val());
+    let OrQty = parseInt($('#OrQty').val());
+
+    if(!orderId || !date || !customerId || !customerName || !itemCode || !itemName || !price || !itemQty || !OrQty) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please ensure all fields are filled out correctly.',
+        });
+    }
+    if(OrQty > itemQty) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Quantity Unavailable',
+                text: "Not enough quantity available.",
+            });
+    }
+    subTotal = price * OrQty;
+    let order = new OrdersModel(orderId, date, customerId, customerName, itemCode, itemName, price, itemQty, OrQty,subTotal);
+    orders_db.push(order);
+    console.log(orders_db);
 
 
+    for(let i = 0; i <item_db.length; i++) {
+        if(item_db[i].itemCode === itemCode) {
+            item_db[i].itemQty -= OrQty;
+            break;
+        }
+    }
+    loadCartData();
+    Swal.fire({
+        icon: 'success',
+        title: 'Item Added',
+        text: 'Item successfully added to cart.',
+    });
 })
+
+const loadCartData = () => {
+    $('#CartBody').empty();
+    total = 0;
+
+    orders_db.map(item => {
+        total += item.total;
+
+        let itemCode = item.itemCode;
+        let itemName = item.itemName;
+        let price = item.price;
+        let OrQty = item.OrQty;
+        let subTotal = item.subTotal;
+
+        let data = `<tr>
+                            <td>${itemCode}</td>
+                            <td>${itemName}</td>
+                            <td>${price}</td>
+                            <td>${OrQty}</td>
+                            <td>${subTotal}</td>
+                            </tr>`
+        $('#CartBody').append(data);
+    });
+    $('#subTotal').text(`Sub Total : ${subTotal.toFixed(2)}`);
+}
