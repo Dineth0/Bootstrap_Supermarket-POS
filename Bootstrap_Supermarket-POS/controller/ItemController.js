@@ -1,5 +1,6 @@
-import {customer_db, item_db} from "../db/db.js";
+import {item_db} from "../db/db.js";
 import ItemModel from "../model/ItemModel.js";
+
 
 $('#item-save').on('click', function(){
     let  itemCode = $('#itemCode').val();
@@ -44,7 +45,7 @@ function loadItemDropdown() {
 }
 
 function loadItemTableData(){
-    $('#item-tbody').empty();
+    $('.item-tbody').empty();
     item_db.map((item, index) => {
         let itemCode = item.itemCode;
         let itemName = item.itemName;
@@ -53,21 +54,22 @@ function loadItemTableData(){
         let qty = item.qty;
 
         let data = `<tr>
-            <td>${itemCode}</td>
-            <td>${itemName}</td>
-            <td>${description}</td>
-            <td>${price}</td>
-            <td>${qty}</td>
-        </tr>`
+             <td>${itemCode}</td>
+             <td>${itemName}</td>
+             <td>${description}</td>
+             <td>${price}</td>
+             <td>${qty}</td>
+         </tr>`
 
-        $('#item-tbody').append(data);
+        $('.item-tbody').append(data);
     });
 
 }
 
-$('.it-body').on('click', 'tr', function () {
-    let id = $(this).index();
-    let obj = item_db[id];
+let selectedIndex = -1;
+$('.item-tbody').on('click', 'tr', function () {
+     selectedIndex = $(this).index();
+    let obj = item_db[selectedIndex];
 
     let itemCode = obj.itemCode;
     let itemName = obj.itemName;
@@ -88,4 +90,35 @@ const clearForm = () =>{
 
 $('#item-clear').on('click', function(){
     clearForm();
-});
+    });
+$('#item-update').on('click', function () {
+    let  itemCode = $('#itemCode').val();
+    let  itemName = $('#itemName').val();
+    let  description = $('#description').val();
+    let  price = $('#price').val();
+    let  qty = $('#qty').val();
+
+    if(selectedIndex === -1){
+        Swal.fire("Error", "Please select a customer to update", "error");
+        return;
+    }
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You want to update this item?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, update it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let updatedItem = new ItemModel(itemCode, itemName, description, price, qty);
+            item_db[selectedIndex] = updatedItem;
+            loadItemTableData();
+            loadItemDropdown();
+            clearForm();
+            Swal.fire("Updated!", "Item has been updated successfully.", "success");
+        }
+    });
+})
