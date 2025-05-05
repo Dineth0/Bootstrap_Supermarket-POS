@@ -12,6 +12,8 @@ $('#selectCustomerId').change(function () {
     });
 });
 
+
+
 $('#selectItemCode').change(function () {
     var selectedValue = $(this).val();
     item_db.map(function (Item) {
@@ -77,9 +79,10 @@ $('#card').on('click', function () {
 const loadCartData = () => {
     $('#CartBody').empty();
     total = 0;
+    let CartSubTotal = 0;
 
     orders_db.map(item => {
-        total += item.total;
+        CartSubTotal += item.subTotal;
 
         let itemCode = item.itemCode;
         let itemName = item.itemName;
@@ -96,5 +99,32 @@ const loadCartData = () => {
                             </tr>`
         $('#CartBody').append(data);
     });
-    $('#subTotal').text(`Sub Total : ${subTotal.toFixed(2)}`);
+
+
+    discountRate = parseFloat($('#rate').val()) || 0;
+    discount = (CartSubTotal * discountRate) / 100;
+    total = CartSubTotal - discount;
+
+    $('#subTotal').text(`Sub Total : ${CartSubTotal.toFixed(2)}`);
+    $('#discount').text(`Discount : ${discount.toFixed(2)}`);
+    $('#total').text(`Total : ${total.toFixed(2)}`);
+
+
+    let cash = parseFloat($('#cash').val()) || 0;
+    let balance = cash - total;
+    $('#balance').text(`Balance : ${balance.toFixed(2)}`);
+
+
+
+
 }
+$('#rate').on('input', function (){
+    loadCartData();
+})
+$('#cash').on('input', function (){
+    loadCartData();
+})
+
+
+
+
