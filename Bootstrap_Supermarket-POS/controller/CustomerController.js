@@ -66,10 +66,10 @@ function loadCustomerTableData(){
                  $('#customer-tbody').append(data);
              });
 }
-
+let selectedIndex = -1;
 $('.cus-body').on('click', 'tr', function () {
-    let id = $(this).index();
-    let obj = customer_db[id];
+     selectedIndex = $(this).index();
+    let obj = customer_db[selectedIndex];
 
     let customerId = obj.customerId;
     let customerName = obj.customerName;
@@ -77,7 +77,7 @@ $('.cus-body').on('click', 'tr', function () {
     let phoneNumber = obj.phoneNumber;
 
     $('#id').val(customerId);
-    $('#customerName').val(customerName);
+    $('#name').val(customerName);
     $('#address').val(address);
     $('#number').val(phoneNumber);
 })
@@ -88,4 +88,39 @@ const clearForm = () =>{
 $('#customer-clear').on('click', function () {
     clearForm();
 });
+
+$('#customer-update').on('click', function () {
+    let customerId = $("#id").val();
+    let customerName = $('#name').val();
+    let address = $('#address').val();
+    let number = $('#number').val();
+
+    if(selectedIndex === -1){
+        Swal.fire("Error", "Please select a customer to update", "error");
+        return;
+    }
+
+    let updateCustomer = new CustomerModel(customerId, customerName, address, number);
+    customer_db[selectedIndex] = updateCustomer;
+    loadCustomerTableData();
+    clearForm();
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, update it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Updated!",
+                text: "Your file has been updated.",
+                icon: "success"
+            });
+        }
+    });
+})
 
