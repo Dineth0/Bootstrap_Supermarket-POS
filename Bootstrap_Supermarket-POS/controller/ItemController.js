@@ -1,4 +1,4 @@
-import {item_db} from "../db/db.js";
+import {customer_db, item_db} from "../db/db.js";
 import ItemModel from "../model/ItemModel.js";
 
 
@@ -122,3 +122,53 @@ $('#item-update').on('click', function () {
         }
     });
 })
+$('#item-delete').on('click', function () {
+    let itemCode = $('#itemCode').val();
+
+    const index = item_db.findIndex(item => item.itemCode === itemCode);
+
+    if (index === -1) {
+        clearForm();
+
+        Swal.fire({
+            title: "Item Not Found",
+            text: "No Item found with the given ID.",
+            icon: "error",
+            showCloseButton: true,
+            confirmButtonText: "OK",
+            customClass: {
+                title: 'error-title',
+                content: 'error-content'
+            }
+        });
+        return;
+    }
+
+
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            item_db.splice(index, 1);
+            loadItemTableData();
+            clearForm();
+            loadItemDropdown();
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    });
+    $('#itemCode').val('');
+})
+
+
