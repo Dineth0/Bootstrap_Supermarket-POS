@@ -113,14 +113,55 @@ $('#customer-update').on('click', function () {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, update it!"
+    });
+})
+
+$('#customer-delete').on('click', function () {
+    let customerId = $('#id').val();
+
+    const index = customer_db.findIndex(item => item.customerId === customerId);
+
+    if (index === -1) {
+        clearForm();
+
+        Swal.fire({
+            title: "Item Not Found",
+            text: "No customer found with the given ID.",
+            icon: "error",
+            showCloseButton: true,
+            confirmButtonText: "OK",
+            customClass: {
+                title: 'error-title',
+                content: 'error-content'
+            }
+        });
+        return;
+    }
+
+
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
+
+            customer_db.splice(index, 1);
+            loadCustomerTableData();
+            clearForm();
+            loadCustomerDropdown();
             Swal.fire({
-                title: "Updated!",
-                text: "Your file has been updated.",
+                title: "Deleted!",
+                text: "Your file has been deleted.",
                 icon: "success"
             });
         }
     });
+    $('#id').val('');
 })
 
