@@ -64,7 +64,8 @@ $('#card').on('click', function () {
 
     for(let i = 0; i <item_db.length; i++) {
         if(item_db[i].itemCode === itemCode) {
-            item_db[i].itemQty -= OrQty;
+            item_db[i].qty -= OrQty;
+            updateItemTable();
             break;
         }
     }
@@ -123,6 +124,74 @@ $('#rate').on('input', function (){
 })
 $('#cash').on('input', function (){
     loadCartData();
+})
+const updateItemTable = () => {
+    $('.item-tbody').empty();
+    item_db.slice(0, 5).forEach((item) => {
+        let data = `<tr>
+                            <td>${item.itemCode}</td>
+                            <td>${item.itemName}</td>
+                            <td>${item.description}</td>
+                            <td>${item.price}</td>
+                            <td>${item.qty}</td>
+                            </tr>`
+        $('.item-tbody').append(data);
+    })
+}
+$('#remove').on('click', function () {
+    let orderId = $('#orderId').val();
+
+    if (!orderId) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Order ID Missing',
+            text: 'Please enter a valid Order ID to remove an item from the cart.',
+        });
+        return;
+    }
+    let removeFromIndex = orders_db.findIndex(item => item.orderId === orderId);
+
+    if (removeFromIndex !== -1) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to remove this item from the cart?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, remove it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let itemRemove = orders_db.splice(removeFromIndex, 1)[0];
+                subTotal -= itemRemove.subTotal;
+
+                $('#rate').val("");
+                $('#discount').val("");
+                $('#total').val("");
+
+                for(let i = 0; i <item_db.length; i++) {
+                    if(item_db[i].itemCode === itemRemove.itemCode) {
+                        item_db[i].qty += itemRemove.OrQty;
+
+                        break;
+                    }
+                }
+                loadCartData();
+                updateItemTable();
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Removed!',
+                    text: 'Item successfully removed from the cart.',
+                });
+            }
+        })
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Order Not Found',
+            text: 'The Order ID provided was not found in the cart.',
+        });
+    }
 })
 
 
