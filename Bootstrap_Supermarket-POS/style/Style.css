@@ -1,35 +1,44 @@
-.navbar{
-    background-color: lightblue ;
-}
+
 .nav-link:hover{
     color: #5f0d72;
 }
 #dashboard{
-    background-color: rgba(260,260,260,0.2);
+    background-color: rgba(255, 255, 255, 0.57);
     height: 100%;
     width: 100%;
 }
 body{
-    background-color: #274751;
+    background:url("../assests/images/supermarket.png")no-repeat center center fixed;
 }
+.navbar{
+    background-color: #DDEB9D;
+    opacity: 0.8;
+
+}
+.navbar a{
+    font-weight: bold;
+    color: black;
+}
+
 .card{
-    background-color: #009990;
+    background-color: #EBD9B4;
     border-radius: 10%;
 }
 .form-control, .form-select{
     background-color: transparent;
+    outline: 1px solid #111110;
 }
 h1{
-    color: white;
+    color: #077A7D;
 }
 #inputSearch{
-    background-color: #B5FCCD;
+    background-color: #F4EDCC;
 }
 .searchBtn{
-    background-color: #009990;
+    background-color: #B19470;
 }
 #itemSearch{
-    background-color: #B5FCCD;
+    background-color: #F4EDCC;
 }
 .btnpurches{
     outline: 2px solid #E9F5BE;
@@ -46,14 +55,23 @@ h1{
 }
 .DashCard{
     box-shadow: #292828 10px 10px 2px;
+    background-color: #F4F8D3;
 }
 .input{
-    border: 5px solid #A0C878;
+    border: 5px solid #E76F51;
     box-shadow: #292828 12px 12px 4px;
 }
 .title{
     text-align: center;
     margin-bottom: 6px;
     font-size: 50px;
-    color: #DDEB9D;
+    color: #FF9800;
+    font-weight: bold;
+
+}
+.card-title{
+    color: #FF9800;
+}
+p{
+    color: #FF9800;
 }

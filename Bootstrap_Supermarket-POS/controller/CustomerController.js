@@ -40,6 +40,7 @@ function loadCustomerDropdown() {
         $('#selectCustomerId').append(
             $('<option>', {
                 value: customer.customerId,
+                text: customer.customerId,
             })
         );
     });

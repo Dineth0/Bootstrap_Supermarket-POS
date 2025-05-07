@@ -1,5 +1,6 @@
-import {orders_db,customer_db,item_db} from "../db/db.js";
+import {orders_db,customer_db,item_db,orderDetails_db} from "../db/db.js";
 import OrdersModel from "../model/OrdersModel.js";
+import OrderDetailsModel from "../model/OrderDetailsModel.js";
 
 $('#selectCustomerId').change(function () {
     var selectedValue = $(this).val();
@@ -50,11 +51,11 @@ $('#card').on('click', function () {
         });
     }
     if(OrQty > itemQty) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Quantity Unavailable',
-                text: "Not enough quantity available.",
-            });
+        Swal.fire({
+            icon: 'warning',
+            title: 'Quantity Unavailable',
+            text: "Not enough quantity available.",
+        });
     }
     subTotal = price * OrQty;
     let order = new OrdersModel(orderId, date, customerId, customerName, itemCode, itemName, price, itemQty, OrQty,subTotal);
@@ -193,7 +194,103 @@ $('#remove').on('click', function () {
         });
     }
 })
+$('.purche').on('click', function () {
+    let orderId = $('#orderId').val();
+    let date = $('#date').val();
+    let customerName = $('#cusName').val();
+    let itemName = $('#OrItemName').val();
+    let price = $('#OrPrice').val();
+    let OrQty = $('#OrQty').val();
+    let subTotal = $('#subTotal').text();
+    let subTotalValue = parseFloat(subTotal.split(':')[1]);
+    let discountRate = $('#rate').val();
+    let discount = $('#discount').text();
+    let discountValue = parseFloat(discount.split(':')[1]);
+    let total = $('#total').text();
+    let totalValue = parseFloat(total.split(':')[1]);
+
+    if(!orderId || !date || !customerName || !itemName || !price || !OrQty || !subTotalValue || !discountRate || !discountValue || !totalValue) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Incomplete Information',
+            text: 'Please ensure all fields are filled out correctly before proceeding.',
+        });
+        return;
+    }
+    Swal.fire({
+        title: 'Confirm Purchase',
+        text: "Are you sure you want to complete this purchase?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, complete purchase',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let OrderDetails = new  OrderDetailsModel(orderId, date, customerName, itemName, price, OrQty, subTotal, discountRate, discount, total);
+            orderDetails_db.push(OrderDetails)
+            Swal.fire({
+                icon: 'success',
+                title: 'Purchase Completed',
+                text: 'The purchase was successfully completed!',
+            });
+            loadOrderDetailsData();
+            clearItem();
+            clearCustomer();
+            $('#subTotal').val("");
+            $('#rate').val("");
+            $('#discount').val("");
+            $('#total').val("");
+            $('#cash').val("");
+            $('#balance').val("");
+            orders_db.length = 0;
+            loadCartData();
 
 
+        }
+    });
+})
 
+const loadOrderDetailsData = () => {
+    $('#OrderDetails-tbody').empty();
+    orderDetails_db.map((item, index) =>{
+        let orderId = item.OrderId;
+        let date = item.Date;
+        let customerName = item.cusName;
+        let itemName = item.ItemName;
+        let price = item.Price;
+        let OrQty = item.OrderQty;
+        let subTotal = item.SubTotal;
+        let discountRate = item.DiscountRate;
+        let discount = item.Discount;
+        let total = item.FinalTotal;
 
+        let data = `<tr>
+                     <td>${orderId}</td>
+                     <td>${date}</td>
+                     <td>${customerName}</td>
+                     <td>${itemName}</td>
+                     <td>${price}</td>
+                     <td>${OrQty}</td>
+                     <td>${subTotal}</td>
+                     <td>${discountRate}</td>
+                     <td>${discount}</td>
+                     <td>${total}</td>
+                     
+                 </tr>`
+        $('#OrderDetails-tbody').append(data);
+    })
+}
+const clearItem = () =>{
+    $("#selectItemCode").val("");
+    $("#OrItemName").val("");
+    $("#OrmPrice").val("");
+    $("#ItemQty").val("");
+    $("#OrQty").val("");
+}
+const clearCustomer = () =>{
+    $("#selectCustomerId").val("");
+    $("#cusName").val("");
+    $("#cusAddress").val("");
+    $("#cusNumber").val("");
+
+}
