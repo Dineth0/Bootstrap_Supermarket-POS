@@ -166,3 +166,77 @@ $('#customer-delete').on('click', function () {
     $('#id').val('');
 })
 
+function isDuplicated(id){
+    return customer_db.some(customer => customer.customerId === id);
+}
+function checkEmptyInputFields(checkId, checkName, checkAddress, checkNumber) {
+    if(checkId && checkName && checkAddress && checkNumber){
+        $('#customer-save').prop('disabled', false);
+    }else {
+        $('#customer-save').prop('disabled', true);
+    }
+}
+function Validation(){
+    let checkId = false;
+    let checkName = false;
+    let checkAddress = false;
+    let checkNumber = false;
+
+    $('#id').on('input', function(){
+        let id = $('#id').val();
+        if(isDuplicated(id)){
+            $('.Cid').text('Duplicate Id').show();
+            $('#id').css({border:'1px solid red'});
+            checkId = false;
+        }else if(/^C\d{3,}$/.test(id)){
+            $('#id').css({border:'1px solid green'});
+            $('.Cid').text('Invalid Id Format. (Ex : Coo1)').hide();
+            checkId = true;
+        }else {
+            $('.Cid').text('Invalid Id Format. (Ex : Coo1)').show();
+            $('#id').css({border:'1px solid red'});
+            checkId = false;
+        }
+        checkEmptyInputFields(checkId, checkName, checkAddress, checkNumber);
+    })
+    $('#name').on('input', function(){
+        let name = $('#name').val();
+        if(/^[A-Za-z]+$/.test(name)){
+            $('#name').css({border:'1px solid green'});
+            $('.Cname').text('Invalid Id Format. (Ex : Dineth)').hide();
+            checkName = true;
+        }else {
+            $('.Cname').text('Invalid Name Format. (Ex : Dineth)').show();
+            $('#name').css({border:'1px solid red'});
+            checkName = false;
+        }
+        checkEmptyInputFields(checkId, checkName, checkAddress, checkNumber);
+    })
+    $('#address').on('input', function(){
+        let address = $('#address').val();
+        if(address.length > 5){
+            $('#address').css({border:'1px solid green'});
+            $('.Caddress').text('Invalid Id Format.').hide();
+            checkAddress = true;
+        }else {
+            $('.Caddress').text('Invalid Id Format.').show();
+            $('#address').css({border:'1px solid red'});
+            checkAddress = false;
+        }
+        checkEmptyInputFields(checkId, checkName, checkAddress, checkNumber);
+    })
+    $('#number').on('input', function(){
+        let number = $('#number').val();
+        if(/^\d{10}$/.test(number)){
+            $('#number').css({border:'1px solid green'});
+            $('.Cnumber').text('Invalid Number Format. (Ex : 0700000000)').hide();
+            checkNumber = true;
+        }else {
+            $('.Cnumber').text('Invalid Id Format. (Ex : 0700000000)').show();
+            $('#number').css({border:'1px solid red'});
+            checkNumber = false;
+        }
+        checkEmptyInputFields(checkId, checkName, checkAddress, checkNumber);
+    })
+}
+Validation('#id', '#name', '#address', '#number', '#customer-save');
