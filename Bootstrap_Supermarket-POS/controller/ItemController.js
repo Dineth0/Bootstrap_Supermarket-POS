@@ -28,6 +28,7 @@ $('#item-save').on('click', function(){
             icon: "success",
             draggable: true
         });
+        $('#itemCount').text(item_db.length);
     }
 });
 
@@ -166,6 +167,7 @@ $('#item-delete').on('click', function () {
                 text: "Your file has been deleted.",
                 icon: "success"
             });
+            $('#itemCount').text(item_db.length);
         }
     });
     $('#itemCode').val('');

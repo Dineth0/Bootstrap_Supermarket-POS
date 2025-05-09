@@ -244,6 +244,7 @@ $('.purche').on('click', function () {
             $('#balance').val("");
             orders_db.length = 0;
             loadCartData();
+            $('#orderCount').text(orderDetails_db.length);
 
 
         }

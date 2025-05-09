@@ -31,6 +31,7 @@ $('#customer-save').on("click", function () {
             draggable: true
 
         })
+        $('#customerCount').text(customer_db.length);
     }
 });
 function loadCustomerDropdown() {
@@ -161,6 +162,7 @@ $('#customer-delete').on('click', function () {
                 text: "Your file has been deleted.",
                 icon: "success"
             });
+            $('#customerCount').text(customer_db.length);
         }
     });
     $('#id').val('');
