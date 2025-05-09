@@ -174,3 +174,93 @@ $('#item-delete').on('click', function () {
 })
 
 
+function isDuplicated(code){
+    return item_db.some(item => item.itemCode() === code);
+}
+function checkEmptyInputFields(checkCode, checkName, checkDescription, checkPrice, checkQty) {
+    if(checkCode && checkName && checkDescription && checkPrice && checkQty) {
+        $('#item-save').prop('disabled', false);
+    }else {
+        $('#item-save').prop('disabled', true);
+    }
+}
+function Validation(){
+    let checkCode = false;
+    let checkName = false;
+    let checkDescription = false;
+    let checkPrice = false;
+    let checkQty = false;
+
+    $('#itemCode').on('input', function(){
+        let code = $('#itemCode').val();
+        if(isDuplicated(id)){
+            $('.Icode').text('Duplicate ItemCode').show();
+            $('#itemCode').css({border:'1px solid red'});
+            checkCode = false;
+        }else if(/^I\d{3,}$/.test(code)){
+            $('#itemCode').css({border:'1px solid green'});
+            $('.Icode').text('Invalid itemCode Format. (Ex : Ioo1)').hide();
+            checkCode = true;
+        }else {
+            $('.Icode').text('Invalid ItemCode Format. (Ex : Ioo1)').show();
+            $('#itemCode').css({border:'1px solid red'});
+            checkCode = false;
+        }
+        checkEmptyInputFields(checkCode, checkName, checkDescription, checkPrice, checkQty);
+    })
+    $('#itemName').on('input', function(){
+        let name = $('#itemName').val();
+        if(/^[A-Za-z]+$/.test(name)){
+            $('#itemName').css({border:'1px solid green'});
+            $('.Iname').text('Invalid Name Format.Only use letters').hide();
+            checkName = true;
+        }else {
+            $('.Iname').text('Invalid Name Format.Only use letters)').show();
+            $('#itemName').css({border:'1px solid red'});
+            checkName = false;
+        }
+        checkEmptyInputFields(checkCode, checkName, checkDescription, checkPrice, checkQty);
+    })
+    $('#description').on('input', function(){
+        let description = $('#description').val();
+        if(/^[A-Za-z0-9]+( [A-Za-z0-9]+)*$/.test(description)){
+            $('#description').css({border:'1px solid green'});
+            $('.Idescription').text('Invalid Id Format.').hide();
+            checkDescription = true;
+        }else {
+            $('.Idescription').text('Invalid Id Format.').show();
+            $('#description').css({border:'1px solid red'});
+            checkDescription = false;
+        }
+        checkEmptyInputFields(checkCode, checkName, checkDescription, checkPrice, checkQty);
+    })
+    $('#price').on('input', function(){
+        let price = $('#price').val();
+        if(/^\d+\.\d{2}$/.test(price)){
+            $('#price').css({border:'1px solid green'});
+            $('.Ipricer').text('Invalid Price Format. (Ex : 000.00)').hide();
+            checkPrice = true;
+        }else {
+            $('.Ipricer').text('Invalid Price Format. (Ex : 000.00').show();
+            $('#price').css({border:'1px solid red'});
+            checkPrice = false;
+        }
+        checkEmptyInputFields(checkCode, checkName, checkDescription, checkPrice, checkQty);
+    })
+    $('#qty').on('input', function(){
+        let qty = $('#qty').val();
+        if(/^[1-9]\d*$/.test(qty)){
+            $('#qty').css({border:'1px solid green'});
+            $('.Iqty').text('Invalid QTY Format.').hide();
+            checkQty = true;
+        }else {
+            $('.Iqty').text('Invalid QTY Format.').show();
+            $('#qty').css({border:'1px solid red'});
+            checkQty = false;
+        }
+        checkEmptyInputFields(checkCode, checkName, checkDescription, checkPrice, checkQty);
+    })
+}
+Validation('#itemCode', '#itemName', '#description', '#price', '#qty','#item-save');
+
+

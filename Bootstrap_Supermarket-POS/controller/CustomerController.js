@@ -53,13 +53,13 @@ function loadCustomerDropdown() {
 function loadCustomerTableData(){
              $('#customer-tbody').empty();
              customer_db.map((item, index) => {
-
+                let id = item.customerId;
                  let customerName = item.customerName;
                  let address = item.address;
                  let phoneNumber = item.phoneNumber;
 
                  let data = `<tr>
-                     <td>${index + 1}</td>
+                     <td>${id}</td>
                      <td>${customerName}</td>
                      <td>${address}</td>
                      <td>${phoneNumber}</td>
