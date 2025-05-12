@@ -295,3 +295,89 @@ const clearCustomer = () =>{
     $("#cusNumber").val("");
 
 }
+function isDuplicated(id){
+    return orders_db.some(item => item.orderId() === id);
+}
+function checkEmptyInputFields01(checkOrderId, checkOrderQty) {
+    if (checkOrderId && checkOrderQty) {
+        $('#card').prop('disabled', false);
+    } else {
+        $('#card').prop('disabled', true);
+    }
+}
+    function checkEmptyInputFields02(checkRate, checkCash) {
+        if (checkRate && checkCash) {
+            $('.purche').prop('disabled', false);
+        } else {
+            $('.purche').prop('disabled', true);
+        }
+    }
+
+function Validation(){
+    let checkOrderId = false;
+    let checkOrderQty = false;
+    let checkRate = false;
+    let checkCash = false;
+
+
+    $('#orderId').on('input', function(){
+        let id = $('#orderId').val();
+        if(isDuplicated(id)){
+            $('.Oid').text('Duplicate ItemCode').show();
+            $('#orderId').css({border:'1px solid red'});
+            checkOrderId = false;
+        }else if(/^OD\d{3,}$/.test(id)){
+            $('#orderId').css({border:'1px solid green'});
+            $('.Oid').text('Invalid itemCode Format. (Ex : OD001)').hide();
+            checkOrderId = true;
+        }else {
+            $('.Oid').text('Invalid ItemCode Format. (Ex : OD001)').show();
+            $('#orderId').css({border:'1px solid red'});
+            checkOrderId = false;
+        }
+        checkEmptyInputFields01(checkOrderId, checkOrderQty);
+    })
+
+    $('#OrQty').on('input', function(){
+        let qty = $('#OrQty').val();
+        if(/^[1-9]\d*$/.test(qty)){
+            $('#OrQty').css({border:'1px solid green'});
+            $('.Oqty').text('Invalid QTY Format.').hide();
+            checkOrderQty = true;
+        }else {
+            $('.Oqty').text('Invalid QTY Format.').show();
+            $('#OrQty').css({border:'1px solid red'});
+            checkOrderQty = false;
+        }
+        checkEmptyInputFields01(checkOrderId, checkOrderQty);
+    })
+    $('#rate').on('input', function(){
+        let rate = $('#rate').val();
+        if(/^[1-9]\d*$/.test(rate)){
+            $('#rate').css({border:'1px solid green'});
+            $('.txtRate').text('Invalid rate Format.. put between 0 and 100').hide();
+
+
+            checkRate = true;
+        }else {
+            $('.txtRate').text('Invalid Price Format. put between 0 and 100').show();
+            $('#rate').css({border:'1px solid red'});
+            checkRate = false;
+        }
+        checkEmptyInputFields02(checkRate, checkCash);
+    })
+    $('#cash').on('input', function(){
+        let price = $('#cash').val();
+        if(/^\d+\.\d{2}$/.test(price)){
+            $('#cash').css({border:'1px solid green'});
+            $('.txtCash').text('Invalid Cash Format. (Ex : 000.00)').hide();
+            checkCash = true;
+        }else {
+            $('.txtCash').text('Invalid Cash Format. (Ex : 000.00').show();
+            $('#cash').css({border:'1px solid red'});
+            checkCash = false;
+        }
+        checkEmptyInputFields02(checkRate, checkCash);
+    })
+}
+Validation('#OrderId', '#OrQty', '#description', '#price', '#qty','#card', '.purche');
