@@ -282,6 +282,8 @@ const loadOrderDetailsData = () => {
     })
 }
 const clearItem = () =>{
+    $('#orderId').val("");
+    $('#date').val("");
     $("#selectItemCode").val("");
     $("#OrItemName").val("");
     $("#OrmPrice").val("");
