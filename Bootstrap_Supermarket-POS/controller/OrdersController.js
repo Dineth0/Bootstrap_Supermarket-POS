@@ -381,3 +381,44 @@ function Validation(){
     })
 }
 Validation('#OrderId', '#OrQty', '#description', '#price', '#qty','#card', '.purche');
+
+function searchOrders(keyword) {
+    $('#OrderDetails-tbody').empty();
+    let filteredOrders = orderDetails_db.filter(order => {
+        return order.OrderId.includes(keyword) ||
+            order.Date.includes(keyword) ||
+            order.cusName.includes(keyword) ||
+            order.ItemName.includes(keyword) ||
+            order.Price.includes(keyword) ||
+            order.OrderQty.includes(keyword) ||
+            order.SubTotal.includes(keyword) ||
+            order.DiscountRate.includes(keyword) ||
+            order.Discount.includes(keyword) ||
+            order.FinalTotal.includes(keyword)
+    });
+
+    if (filteredOrders.length === 0) {
+        $('#OrderDetails-tbody').append(`<tr><td colspan="10" class="text-center text-danger">No results found</td></tr>`);
+    } else {
+        filteredOrders.forEach(item => {
+            let data = `<tr>
+                <td>${item.OrderId}</td>
+                <td>${item.Date}</td>
+                <td>${item.cusName}</td>
+                <td>${item.ItemName}</td>
+                <td>${item.Price}</td>
+                <td>${item.OrderQty}</td>
+                <td>${item.SubTotal}</td>
+                <td>${item.DiscountRate}</td>
+                <td>${item.Discount}</td>
+                <td>${item.FinalTotal}</td>
+            </tr>`;
+
+            $('#OrderDetails-tbody').append(data);
+        });
+    }
+}
+$('#button-addonO').on('click', function () {
+    let keyword = $('#orderSearch').val();
+    searchOrders(keyword);
+});

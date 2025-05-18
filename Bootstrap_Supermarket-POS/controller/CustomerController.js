@@ -242,3 +242,34 @@ function Validation(){
     })
 }
 Validation('#id', '#name', '#address', '#number', '#customer-save');
+
+function searchCustomer(keyword) {
+    $('#customer-tbody').empty();
+    let filteredCustomers = customer_db.filter(customer => {
+        return customer.customerId.includes(keyword) ||
+            customer.customerName.includes(keyword) ||
+            customer.address.includes(keyword) ||
+            customer.phoneNumber.includes(keyword);
+    });
+
+    if (filteredCustomers.length === 0) {
+        $('#customer-tbody').append(`<tr><td colspan="4" class="text-center text-danger">No results found</td></tr>`);
+    } else {
+        filteredCustomers.forEach(item => {
+            let data = `<tr>
+                <td>${item.customerId}</td>
+                <td>${item.customerName}</td>
+                <td>${item.address}</td>
+                <td>${item.phoneNumber}</td>
+            </tr>`;
+
+            $('#customer-tbody').append(data);
+        });
+    }
+}
+$('#button-addonC').on('click', function () {
+    let keyword = $('#inputSearch').val();
+    searchCustomer(keyword);
+});
+
+

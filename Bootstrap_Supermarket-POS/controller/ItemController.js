@@ -263,4 +263,35 @@ function Validation(){
 }
 Validation('#itemCode', '#itemName', '#description', '#price', '#qty','#item-save');
 
+function searchItem(keyword) {
+    $('.item-tbody').empty();
+    let filteredItems = item_db.filter(item => {
+        return item.itemCode.includes(keyword) ||
+            item.itemName.includes(keyword) ||
+            item.description.includes(keyword) ||
+            item.price.includes(keyword) ||
+            item.qty.includes(keyword);
+    });
+
+    if (filteredItems.length === 0) {
+        $('.item-tbody').append(`<tr><td colspan="5" class="text-center text-danger">No results found</td></tr>`);
+    } else {
+        filteredItems.forEach(item => {
+            let data = `<tr>
+                <td>${item.itemCode}</td>
+                <td>${item.itemName}</td>
+                <td>${item.description}</td>
+                <td>${item.price}</td>
+                <td>${item.qty}</td>
+            </tr>`;
+
+            $('.item-tbody').append(data);
+        });
+    }
+}
+$('#button-addonI').on('click', function () {
+    let keyword = $('#itemSearch').val();
+    searchItem(keyword);
+});
+
 
