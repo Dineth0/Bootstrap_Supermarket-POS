@@ -28,11 +28,25 @@ $('#selectItemCode').change(function () {
 })
 
 
+function generateOrderId(){
+    let lastOrderId = $("#orderId").val();
+
+    if (!lastOrderId) {
+        lastOrderId = "OD001";
+    }
+
+    let number = parseInt(lastOrderId.substring(2)) + 1;
+    let newOrderId = "OD" + number.toString().padStart(3, "0");
+
+    $("#orderId").val(newOrderId);
+}
+
 let subTotal = 0;
 let discountRate = 0;
 let discount = 0;
 let total = 0;
 $('#card').on('click', function () {
+
     let orderId = $('#orderId').val();
     let date = $('#date').val();
     let customerId = $('#selectCustomerId').val();
@@ -195,6 +209,7 @@ $('#remove').on('click', function () {
     }
 })
 $('.purche').on('click', function () {
+
     let orderId = $('#orderId').val();
     let date = $('#date').val();
     let customerName = $('#cusName').val();
@@ -244,6 +259,7 @@ $('.purche').on('click', function () {
             $('#balance').val("");
             orders_db.length = 0;
             loadCartData();
+            generateOrderId();
             $('#orderCount').text(orderDetails_db.length);
 
 
@@ -282,7 +298,7 @@ const loadOrderDetailsData = () => {
     })
 }
 const clearItem = () =>{
-    $('#orderId').val("");
+
     $('#date').val("");
     $("#selectItemCode").val("");
     $("#OrItemName").val("");
