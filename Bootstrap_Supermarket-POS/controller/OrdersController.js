@@ -298,7 +298,7 @@ const clearCustomer = () =>{
 
 }
 function isDuplicated(id){
-    return orders_db.some(item => item.orderId() === id);
+    return orders_db.some(orders => orders.orderId() === id);
 }
 function checkEmptyInputFields01(checkOrderId, checkOrderQty) {
     if (checkOrderId && checkOrderQty) {

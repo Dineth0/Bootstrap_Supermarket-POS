@@ -175,7 +175,7 @@ $('#item-delete').on('click', function () {
 
 
 function isDuplicated(code){
-    return item_db.some(item => item.itemCode() === code);
+    return item_db.some(Item => Item.itemCode() === code);
 }
 function checkEmptyInputFields(checkCode, checkName, checkDescription, checkPrice, checkQty) {
     if(checkCode && checkName && checkDescription && checkPrice && checkQty) {
@@ -193,7 +193,7 @@ function Validation(){
 
     $('#itemCode').on('input', function(){
         let code = $('#itemCode').val();
-        if(isDuplicated(id)){
+        if(isDuplicated(code)){
             $('.Icode').text('Duplicate ItemCode').show();
             $('#itemCode').css({border:'1px solid red'});
             checkCode = false;
