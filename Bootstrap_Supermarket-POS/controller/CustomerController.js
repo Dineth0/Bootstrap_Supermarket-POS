@@ -17,14 +17,21 @@ $('#customer-save').on("click", function () {
             icon: 'error',
             confirmButtonText: 'Ok'
         });
-    }else {
+    }else if (isDuplicated(customerId)) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Customer ID already exists!',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
+    } else {
         let customer_data = new CustomerModel(customerId, customerName, address, number);
         customer_db.push(customer_data);
         clearForm();
         console.log(customer_db);
-        loadCustomerDropdown();
         loadCustomerTableData();
-        $('#selectCustomerId').append($('<option>').text(customerId));
+        loadCustomerDropdown();
+
         Swal.fire({
             title: "Added Successfully!",
             icon: "success",
@@ -41,6 +48,7 @@ function loadCustomerDropdown() {
         $('#selectCustomerId').append(
             $('<option>', {
                 value: customer.customerId,
+                text: customer.customerId
             })
         );
     });
@@ -104,6 +112,7 @@ $('#customer-update').on('click', function () {
     let updateCustomer = new CustomerModel(customerId, customerName, address, number);
     customer_db[selectedIndex] = updateCustomer;
     loadCustomerTableData();
+    loadCustomerDropdown();
     clearForm();
 
     Swal.fire({
