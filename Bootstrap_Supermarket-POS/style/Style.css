@@ -40,16 +40,16 @@ h1{
 #itemSearch{
     background-color: #F4EDCC;
 }
-.btnpurches{
-    outline: 2px solid #E9F5BE;
+.purche{
+    outline: 2px solid #85a40f;
     border-radius: 3px;
     background-color: transparent;
     border: none;
     margin: 5px;
     padding: 5px;
-    color: #E9F5BE;
+    color: #85a40f;
 }
-.btnpurches:hover{
+.purche:hover{
     background-color: #E9F5BE;
     color: black;
 }
