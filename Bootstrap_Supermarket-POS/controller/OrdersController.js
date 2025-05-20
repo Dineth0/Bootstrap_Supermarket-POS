@@ -300,7 +300,7 @@ const clearItem = () =>{
     $('#date').val("");
     $("#selectItemCode").val("");
     $("#OrItemName").val("");
-    $("#OrmPrice").val("");
+    $("#OrPrice").val("");
     $("#ItemQty").val("");
     $("#OrQty").val("");
 }

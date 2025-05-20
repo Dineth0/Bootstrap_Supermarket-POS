@@ -41,7 +41,6 @@ function loadCustomerDropdown() {
         $('#selectCustomerId').append(
             $('<option>', {
                 value: customer.customerId,
-                text: customer.customerId,
             })
         );
     });
@@ -203,7 +202,7 @@ function Validation(){
     })
     $('#name').on('input', function(){
         let name = $('#name').val();
-        if(/^[A-Za-z]+$/.test(name)){
+        if(/^[A-Za-z ]+$/.test(name)){
             $('#name').css({border:'1px solid green'});
             $('.Cname').text('Invalid Id Format. (Ex : Dineth)').hide();
             checkName = true;

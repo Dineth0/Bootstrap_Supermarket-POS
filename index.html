@@ -185,7 +185,7 @@
                         <br>
                         <form>
                             <div class="mb-3">
-                                <label for="itemCode" class="form-label">Item ID</label>
+                                <label for="itemCode" class="form-label">Item Code</label>
                                 <input type="text" class="form-control" id="itemCode" placeholder="">
                                 <small class="text-danger Icode" style="display: none;"></small>
                             </div>
@@ -245,7 +245,7 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th scope="col">ItemID</th>
+                                <th scope="col">ItemCode</th>
                                 <th scope="col">ItemName</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Price</th>
@@ -290,15 +290,15 @@
                             </div>
                             <div class="mb-3">
                                 <label for="cusName" class="form-label">Customer Name</label>
-                                <input type="text" class="form-control" id="cusName" placeholder="">
+                                <input type="text" class="form-control" id="cusName" placeholder="" readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="cusAddress" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="cusAddress" placeholder="">
+                                <input type="text" class="form-control" id="cusAddress" placeholder="" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="cusNumber" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="cusNumber" placeholder="">
+                                <label for="cusNumber" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="cusNumber" placeholder="" readonly>
                             </div>
 
 
@@ -312,20 +312,20 @@
                     <br>
                     <form>
                         <div class="mb-3">
-                            <label for="selectItemCode" class="form-label">Item Id</label>
+                            <label for="selectItemCode" class="form-label">Item Code</label>
                             <select id="selectItemCode" class="form-select"></select>
                         </div>
                         <div class="mb-3">
                             <label for="OrItemName" class="form-label">Item Name</label>
-                            <input type="text" class="form-control" id="OrItemName" placeholder="">
+                            <input type="text" class="form-control" id="OrItemName" placeholder="" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="OrPrice" class="form-label">price</label>
-                            <input type="text" class="form-control" id="OrPrice" placeholder="">
+                            <input type="text" class="form-control" id="OrPrice" placeholder="" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="ItemQty" class="form-label">QTY</label>
-                            <input type="text" class="form-control" id="ItemQty" placeholder="">
+                            <input type="text" class="form-control" id="ItemQty" placeholder="" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="OrQty" class="form-label">Order QTY</label>
@@ -345,7 +345,7 @@
                     <form>
                         <div class="mb-3">
                             <div>
-                                <h4>SubTotal :<span  id="subTotal">00.00</span></h4>
+                                <h4>SubTotal  :  <span  id="subTotal">00.00</span></h4>
 
                             </div>
                         </div>
@@ -356,7 +356,7 @@
                         </div>
                         <div class="mb-3">
                             <div>
-                                <h4>Discount:<span><h4  id="discount">00.00</h4></span> </h4>
+                                <h4>Discount  :  <span><h4  id="discount">00.00</h4></span> </h4>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -372,7 +372,7 @@
                         </div>
                         <div class="mb-3">
                             <div>
-                                <h4>Balance : <span id="balance">00.00</span> </h4>
+                                <h4>Balance  :  <span id="balance">00.00</span> </h4>
 
                             </div>
                         </div>

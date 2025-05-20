@@ -29,7 +29,8 @@ body{
     outline: 1px solid #111110;
 }
 h1{
-    color: #077A7D;
+    color: #00ff77;
+    font-weight: bold;
 }
 #inputSearch{
     background-color: #F4EDCC;
