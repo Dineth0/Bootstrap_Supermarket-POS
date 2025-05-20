@@ -121,14 +121,14 @@ const loadCartData = () => {
     discount = (CartSubTotal * discountRate) / 100;
     total = CartSubTotal - discount;
 
-    $('#subTotal').text(`Sub Total : ${CartSubTotal.toFixed(2)}`);
-    $('#discount').text(`Discount : ${discount.toFixed(2)}`);
-    $('#total').text(`Total : ${total.toFixed(2)}`);
+    $('#subTotal').text(`${CartSubTotal.toFixed(2)}`);
+    $('#discount').text(`${discount.toFixed(2)}`);
+    $('#total').text(`${total.toFixed(2)}`);
 
 
     let cash = parseFloat($('#cash').val()) || 0;
     let balance = cash - total;
-    $('#balance').text(`Balance : ${balance.toFixed(2)}`);
+    $('#balance').text(`${balance.toFixed(2)}`);
 
 
 
@@ -217,14 +217,12 @@ $('.purche').on('click', function () {
     let price = $('#OrPrice').val();
     let OrQty = $('#OrQty').val();
     let subTotal = $('#subTotal').text();
-    let subTotalValue = parseFloat(subTotal.split(':')[1]);
     let discountRate = $('#rate').val();
     let discount = $('#discount').text();
-    let discountValue = parseFloat(discount.split(':')[1]);
     let total = $('#total').text();
-    let totalValue = parseFloat(total.split(':')[1]);
 
-    if(!orderId || !date || !customerName || !itemName || !price || !OrQty || !subTotalValue || !discountRate || !discountValue || !totalValue) {
+
+    if(!orderId || !date || !customerName || !itemName || !price || !OrQty  || !subTotal || !discountRate  || !discount || !total) {
         Swal.fire({
             icon: 'error',
             title: 'Incomplete Information',
